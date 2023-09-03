@@ -10,7 +10,7 @@ pipeline{
     stages{
         stage("Git Checkout"){
             steps{
-                git credentialsId: 'javahome2', url: 'https://github.com/srinicloud87/myweb.git'
+                git credentialsId: 'javahome2', url: 'https://github.com/kommetavenkatesh/myweb.git'
             }
         }
         stage("Maven Build"){
@@ -42,11 +42,11 @@ pipeline{
             steps{
                 sshagent(['tomcat-new']) {
                 sh """
-                    scp -o StrictHostKeyChecking=no target/myweb-8.2.0.war  ec2-user@172.31.12.123:/home/ec2-user/apache-tomcat-9.0.76/webapps/
+                    scp -o StrictHostKeyChecking=no target/myweb-8.2.0.war  ec2-user@35.77.227.242:/home/ec2-user/apache-tomcat-9.0.80/webapps/
                     
-                    ssh ec2-user@172.31.12.123 /home/ec2-user/apache-tomcat-9.0.76/bin/shutdown.sh
+                    ssh ec2-user@35.77.227.242 /home/ec2-user/apache-tomcat-9.0.80/bin/shutdown.sh
                     
-                    ssh ec2-user@172.31.12.123 /home/ec2-user/apache-tomcat-9.0.76/bin/startup.sh
+                    ssh ec2-user@35.77.227.242 /home/ec2-user/apache-tomcat-9.0.80/bin/startup.sh
                 
                 """
             }
